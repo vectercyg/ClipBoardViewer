@@ -1,0 +1,33 @@
+/*
+ * @Descripttion: 配置代码补全环境
+ * @version: 
+ * @Author: cuiyonggan
+ * @Date: 2022-07-15 14:21:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-15 15:22:01
+ */
+{
+    
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.17763.0",
+            // 自己电脑上的g++路径
+            "compilerPath": "D:/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
+            // 配置通过cmake引入第三方库的代码补全
+            "configurationProvider": "vector-of-bool.cmake-tools"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,50 @@
+/*
+ * @Descripttion: 配置调试环境
+ * @version: 
+ * @Author: cuiyonggan
+ * @Date: 2022-07-15 14:21:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-15 16:24:52
+ */
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // Debug 1，这里也可以配置多个Debug任务，这其实和tasks.json很类似
+        {
+            "name": "g++.exe - 生成和调试活动文件",
+            "type": "cppdbg",
+            "request": "launch",
+            // 指向要调试程序的绝对路径，这是需要按照你的需要进行调整的
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            // 传递参数给应用程序
+            "args": [],
+            "stopAtEntry": false,
+            // 当前工作路径
+            "cwd": "${fileDirname}",
+            // 这里需要特别注意，这里要把应用程序运行需要的动态链接库的路径，放进来，可根据需要进行调整
+            // "environment": [{"name": "PATH","value": "${PATH};D:/software/opencv/build-gcc/bin;D:/software/aruco/bin"}],
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            // 这里需要填写你自己的gdb.exe的路径
+            "miDebuggerPath": "D:\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            // 指示在调试之前先执行哪些命令，和tasks.json中相关；
+            "preLaunchTask": "C/C++: g++.exe 生成活动文件"
+        }
+    ]
+}

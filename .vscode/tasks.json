@@ -1,0 +1,114 @@
+/*
+ * @Descripttion: 配置编译(build)环境
+ * @version: 
+ * @Author: cuiyonggan
+ * @Date: 2022-07-15 14:21:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-15 16:18:32
+ */
+{
+    "tasks": [
+        // 直接运行的编译环境
+        {
+            "type": "shell",
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "D:\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true//表示快捷键Ctrl+Shift+B可以运行该任务
+            },
+            "detail": "调试器生成的任务。"
+        },
+        // 以下为使用make时的编译环境
+        {
+            // 这里决定了task的类型，shell类型就是在命令行里运行command的命令，还有一种类型是“process”，
+            "type": "shell",
+            // task的名字
+            "label": "mkdir_build",
+            // 需要被运行的命令
+            "command": "mkdir",
+            // 传递给command的参数
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                // 这里说明这个任务时输入"build"类型的，也就是说明，这是一个生成任务
+                "kind":"none",
+                "isDefault": false
+            },
+        },
+        {
+            "type": "shell",
+            "label": "cmake",
+            "command": "cmake",
+            "args": [
+                "-G",
+                // 这里必须定义生成器，否则默认cmake生成的是VS Studio可编译的工程
+                "MinGW Makefiles", 
+                "${workspaceFolder}"
+            ],
+            "options": {
+                // 工作路径，就是说cmake的输出都会放在${workspaceFolder}/build文件夹下
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": {
+                // 这里说明这个任务时输入"build"类型的，也就是说明，这是一个生成任务
+                "kind": "none",
+                "isDefault": false
+            },
+        },
+        {
+            "type": "shell",
+            "label": "make",
+            "command": "mingw32-make",
+            "args": [
+                "-j4"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Build",
+            "dependsOrder": "sequence",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            // 这里设置配置依赖task，说明了这个任务一定要在dependsOn中的tasks执行之后方可执行
+            "dependsOn": [    
+                "mkdir_build", 
+                "cmake",
+                "make"
+            ],
+            "detail": "make生成的任务。"
+        },
+    ],
+    "version": "2.0.0"
+}
