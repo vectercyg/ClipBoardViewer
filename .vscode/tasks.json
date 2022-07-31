@@ -4,7 +4,7 @@
  * @Author: cuiyonggan
  * @Date: 2022-07-15 14:21:41
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-07-15 16:18:32
+ * @LastEditTime: 2022-07-31 11:06:28
  */
 {
     "tasks": [
@@ -18,7 +18,8 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-mwindows",
             ],
             "options": {
                 "cwd": "${fileDirname}"
